@@ -1,73 +1,128 @@
-# Welcome to your Lovable project
+# BeyondChats Article Viewer - Phase 3
 
-## Project info
+A ReactJS frontend application that fetches and displays articles from the Laravel API, showing both original and AI-enhanced versions.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Features
 
-## How can I edit this code?
+- **Article Listing**: Browse all articles in a responsive grid layout
+- **Tab Navigation**: Switch between Original Articles and AI-Enhanced versions
+- **Article Detail View**: Read full articles with beautiful typography
+- **Version Toggle**: Compare original and AI-enhanced versions side by side
+- **Reference Sources**: View cited sources for AI-enhanced articles
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
+- **Loading States**: Smooth loading indicators for better UX
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+- **React 18** - UI Library
+- **Vite** - Build Tool
+- **React Router DOM** - Client-side routing
+- **TailwindCSS** - Styling
+- **Lucide React** - Icons
+- **React Query** - Data fetching (prepared for API integration)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js 18+ 
+- npm or yarn
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. Clone or extract the project:
+   ```bash
+   cd beyondchats-articles
+   ```
 
-Follow these steps:
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+3. Start development server:
+   ```bash
+   npm run dev
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+4. Open http://localhost:5173 in your browser
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Build for Production
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+npm run build
 ```
 
-**Edit a file directly in GitHub**
+The built files will be in the `dist/` folder.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## API Integration
 
-**Use GitHub Codespaces**
+The app uses mock data in `src/data/articles.js`. To connect to your Laravel API:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+1. Update the fetch functions in `src/data/articles.js`:
+   ```javascript
+   export const fetchArticles = async () => {
+     const response = await fetch('YOUR_LARAVEL_API_URL/api/articles');
+     return response.json();
+   };
+   ```
 
-## What technologies are used for this project?
+2. Ensure your Laravel API returns data in this format:
+   ```json
+   {
+     "id": 1,
+     "title": "Article Title",
+     "slug": "article-slug",
+     "excerpt": "Short description...",
+     "content": "<p>HTML content...</p>",
+     "author": "Author Name",
+     "publishedAt": "2024-12-15",
+     "readTime": 5,
+     "category": "Category Name",
+     "imageUrl": "https://...",
+     "hasUpdatedVersion": true
+   }
+   ```
 
-This project is built with:
+## Project Structure
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```
+src/
+├── components/
+│   ├── ArticleCard.jsx      # Card component for article preview
+│   ├── ArticleGrid.jsx      # Grid layout for articles
+│   ├── Header.jsx           # Navigation header
+│   ├── LoadingSpinner.jsx   # Loading indicator
+│   ├── VersionToggle.jsx    # Toggle between versions
+│   └── ui/                  # Shadcn UI components
+├── data/
+│   └── articles.js          # Mock data & API functions
+├── pages/
+│   ├── Index.jsx            # Home page with article listing
+│   ├── ArticleDetail.jsx    # Single article view
+│   └── NotFound.jsx         # 404 page
+├── App.jsx                  # Main app with routing
+├── main.jsx                 # Entry point
+└── index.css                # Global styles & design tokens
+```
 
-## How can I deploy this project?
+## Design System
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+The app uses a custom design system with:
 
-## Can I connect a custom domain to my Lovable project?
+- **Colors**: Warm cream backgrounds with deep teal accents
+- **Typography**: Playfair Display (headings) + Source Sans 3 (body)
+- **Shadows**: Soft, elegant shadow system
+- **Animations**: Smooth fade-in and hover effects
 
-Yes, you can!
+## Assignment Context
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+This is **Phase 3** of the BeyondChats Technical Product Manager assignment:
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- **Phase 1**: Laravel CRUD API for articles (backend)
+- **Phase 2**: NodeJS script for Google search & LLM enhancement
+- **Phase 3**: ReactJS frontend for displaying articles ← *This project*
+
+## License
+
+MIT
